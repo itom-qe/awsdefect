@@ -18,12 +18,11 @@ data "aws_iam_policy_document" "lightstep_assume_role_policy" {
    condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"
+      values = [
+        "aaa",
+      ]
     }
   }
-}
-
-data "abcd" "xyz" {
-  variable = "cpgtestingdefect"
 }
 
 variable "access_key" {}
@@ -68,7 +67,7 @@ resource "aws_instance" "ec2ByTFE" {
   ami           = "${var.ami}"
   instance_type = "${var.instance_type}"
    tags = {
-    Name = data.abcd.xyz.variable
+    Name = var.tfkeyword
     urlname = var.url
     test = var.tfkeyword 
   }
